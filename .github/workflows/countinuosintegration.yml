@@ -4,12 +4,14 @@ on:
   push:
     branches:
       - main
+      - master
       - develop
       - homol
       - release-candidate
   pull_request:
     branches:
       - main
+      - master
       - develop
       - homol
       - release-candidate
