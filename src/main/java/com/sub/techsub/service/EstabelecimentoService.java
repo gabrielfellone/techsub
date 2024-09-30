@@ -64,7 +64,7 @@ public class EstabelecimentoService {
                 estabelecimentoServico.setServicoId(servico.getId());
                 estabelecimentoServicoRepository.save(estabelecimentoServico);
             } catch (RuntimeException e){
-                throw new RuntimeException("Servicos encontrados");
+                throw new RuntimeException("Servicos nao encontrados");
             }
         });
     }

@@ -5,11 +5,14 @@ import com.sub.techsub.controller.EstabelecimentoController;
 import com.sub.techsub.controller.resources.requests.EstabelecimentoRequest;
 import com.sub.techsub.controller.resources.responses.EstabelecimentoResource;
 import com.sub.techsub.entity.Profissional;
+import com.sub.techsub.entity.Servico;
 import com.sub.techsub.entity.reference.EstabelecimentoProfissional;
 import com.sub.techsub.entity.reference.EstabelecimentoServico;
 import com.sub.techsub.repository.ProfissionalRepository;
+import com.sub.techsub.repository.ServicosRepository;
 import com.sub.techsub.service.EstabelecimentoService;
 import com.sub.techsub.service.ProfissionalService;
+import com.sub.techsub.service.ServicosService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -19,6 +22,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.ArrayList;
@@ -33,6 +37,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+@ActiveProfiles("test")
 @SpringBootTest
 @AutoConfigureMockMvc
 public class EstabelecimentoControllerTest {
@@ -43,6 +48,9 @@ public class EstabelecimentoControllerTest {
 
     @Mock
     private EstabelecimentoService estabelecimentoService;
+
+    @Mock
+    private ServicosService servicosService;
 
     @InjectMocks
     private EstabelecimentoController estabelecimentoController;
@@ -56,8 +64,14 @@ public class EstabelecimentoControllerTest {
 
     private Profissional profissional;
 
+    private Servico servico;
+
     @Autowired
     private ProfissionalRepository profissionalRepository;
+
+    @Autowired
+    private ServicosRepository servicosRepository;
+
 
 
     @BeforeEach
@@ -68,15 +82,22 @@ public class EstabelecimentoControllerTest {
         profissional = new Profissional();
         profissional.setNome("Gabriel");
 
+        servico = new Servico();
+        servico.setId(1L);
+        servico.setNome("Massagem");
+
         ArrayList<String> fotos = new ArrayList<>();
         List<EstabelecimentoServico> estabelecimentoServicos = new ArrayList<>();
         List<EstabelecimentoProfissional> profissionais = new ArrayList<>();
 
+        EstabelecimentoServico estabelecimentoServicoUm = new EstabelecimentoServico();
+        estabelecimentoServicoUm.setEstabelecimentoId(1L);
+        estabelecimentoServicoUm.setServicoId(1L);
 
         fotos.add("Foto1.jpg");
         fotos.add("Foto2.jpg");
 
-        estabelecimentoServicos.add(new EstabelecimentoServico());
+        estabelecimentoServicos.add(estabelecimentoServicoUm);
         profissionais.add(new EstabelecimentoProfissional());
 
         estabelecimentoRequest = new EstabelecimentoRequest();
@@ -97,8 +118,16 @@ public class EstabelecimentoControllerTest {
         profs.add(idProfissional);
         estabelecimentoRequest.setProfissionais(profs);
 
+        long idServico = servicosRepository.save(servico).getId();
+
+        List<Long> servicos = new ArrayList<>();
+        servicos.add(idServico);
+        estabelecimentoRequest.setServicos(servicos);
+
         when(estabelecimentoService.cadastrarEstabelecimento(any(EstabelecimentoRequest.class))).thenReturn(idEsperado);
         when(profissionalService.buscaPorIdProfissional(1L)).thenReturn(new Profissional());
+        when(servicosService.buscaPorIdServico(1L)).thenReturn(new Servico());
+
 
         mockMvc.perform(post("/api/estabelecimento")
                         .contentType(MediaType.APPLICATION_JSON)
