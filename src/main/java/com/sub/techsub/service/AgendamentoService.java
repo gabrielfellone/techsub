@@ -93,6 +93,7 @@ public class AgendamentoService {
         return agendamentoRepository.findAll();
     }
     public LocalDate formataDataParaAgendamento(LocalDateTime dataAgendamento) {
+        log.info("Formatando Data para Agendamento ...");
         LocalDate localDate = dataAgendamento.toLocalDate();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         String dataFormatada = localDate.format(formatter);
