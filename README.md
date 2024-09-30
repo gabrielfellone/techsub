@@ -18,7 +18,7 @@ de software, desenvolvimento orientado a testes e práticas de código limpo.
 
 ## Desenho e Documentação do Projeto
 
-- [**Desenho da solução** ](https://miro.com/app/board/uXjVKrPLMaQ=/?share_link_id=624660829579)
+- [**Desenho da solução** ](https://miro.com/app/board/uXjVLY1xlkY=/?share_link_id=477520251858)
 
 ---
 
