@@ -6,12 +6,15 @@ import com.sub.techsub.entity.Cliente;
 import com.sub.techsub.entity.Estabelecimento;
 import com.sub.techsub.entity.Profissional;
 import com.sub.techsub.repository.AgendamentoRepository;
+import com.sub.techsub.repository.ClienteRepository;
+import com.sub.techsub.repository.EstabelecimentoRepository;
 import com.sub.techsub.repository.ProfissionalRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import java.time.LocalDate;
@@ -20,6 +23,7 @@ import java.time.LocalTime;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@ActiveProfiles("test")
 @SpringJUnitConfig
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
@@ -30,6 +34,12 @@ public class AgendamentoRepositoryTest {
 
     @Autowired
     private ProfissionalRepository profissionalRepository;
+
+    @Autowired
+    private ClienteRepository clienteRepository;
+
+    @Autowired
+    private EstabelecimentoRepository estabelecimentoRepository;
 
     private Agendamento agendamento;
 
@@ -48,9 +58,13 @@ public class AgendamentoRepositoryTest {
 
         estabelecimento = new Estabelecimento();
         estabelecimento.setId(1L);
+        estabelecimento.setNome("Beleza Now");
+        estabelecimento.setEndereco("Rua das Batatas");
 
         cliente = new Cliente();
         cliente.setId(1L);
+        cliente.setNome("Gabriel F");
+
 
         agendamento = new Agendamento();
         agendamento.setCliente(cliente);
@@ -76,6 +90,14 @@ public class AgendamentoRepositoryTest {
         profissional.setId(id);
         agendamento.setProfissional(profissional);
 
+        long idCliente = clienteRepository.save(cliente).getId();
+        cliente.setId(idCliente);
+        agendamento.setCliente(cliente);
+
+        long idEstabelecimento = estabelecimentoRepository.save(estabelecimento).getId();
+        estabelecimento.setId(idEstabelecimento);
+        agendamento.setEstabelecimento(estabelecimento);
+
         Agendamento savedAgendamento = agendamentoRepository.save(agendamento);
         assertThat(savedAgendamento.getId()).isNotNull();
         assertThat(savedAgendamento.getStatus()).isEqualTo("AGENDADO");
@@ -87,6 +109,15 @@ public class AgendamentoRepositoryTest {
         profissional.setId(id);
         agendamento.setProfissional(profissional);
 
+        long idCliente = clienteRepository.save(cliente).getId();
+        cliente.setId(idCliente);
+        agendamento.setCliente(cliente);
+
+        long idEstabelecimento = estabelecimentoRepository.save(estabelecimento).getId();
+        estabelecimento.setId(idEstabelecimento);
+        agendamento.setEstabelecimento(estabelecimento);
+
+
         Agendamento savedAgendamento = agendamentoRepository.save(agendamento);
 
         Agendamento foundAgendamento = agendamentoRepository.findById(savedAgendamento.getId()).orElse(null);
@@ -97,9 +128,18 @@ public class AgendamentoRepositoryTest {
     @Test
     public void testDeleteAgendamento() {
 
-        long id = profissionalRepository.save(profissional).getId();
-        profissional.setId(id);
+        long idProfissional = profissionalRepository.save(profissional).getId();
+        profissional.setId(idProfissional);
         agendamento.setProfissional(profissional);
+
+        long idCliente = clienteRepository.save(cliente).getId();
+        cliente.setId(idCliente);
+        agendamento.setCliente(cliente);
+
+        long idEstabelecimento = estabelecimentoRepository.save(estabelecimento).getId();
+        estabelecimento.setId(idEstabelecimento);
+        agendamento.setEstabelecimento(estabelecimento);
+
 
         Agendamento savedAgendamento = agendamentoRepository.save(agendamento);
         agendamentoRepository.delete(savedAgendamento);
@@ -114,6 +154,18 @@ public class AgendamentoRepositoryTest {
         profissional.setId(id);
         agendamento.setProfissional(profissional);
         agendamento2.setProfissional(profissional);
+
+        long idCliente = clienteRepository.save(cliente).getId();
+        cliente.setId(idCliente);
+        agendamento.setCliente(cliente);
+        agendamento2.setCliente(cliente);
+
+        long idEstabelecimento = estabelecimentoRepository.save(estabelecimento).getId();
+        estabelecimento.setId(idEstabelecimento);
+        agendamento.setEstabelecimento(estabelecimento);
+        agendamento2.setEstabelecimento(estabelecimento);
+
+        agendamento2.setId(50L);
 
         Agendamento savedAgendamento = agendamentoRepository.save(agendamento);
         assertThat(savedAgendamento.getId()).isNotNull();
