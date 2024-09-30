@@ -1,0 +1,106 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=windows-1252"> 
+  <title>Coverage Report > AvaliacaoRequest</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.sub.techsub.controller.resources.requests</a>
+</div>
+
+<h1>Coverage Summary for Class: AvaliacaoRequest (com.sub.techsub.controller.resources.requests)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+</tr>
+  <tr>
+    <td class="name">AvaliacaoRequest$AvaliacaoRequestBuilder</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.sub.techsub.controller.resources.requests;
+&nbsp;
+&nbsp;import jakarta.validation.constraints.Max;
+&nbsp;import jakarta.validation.constraints.Min;
+&nbsp;import lombok.AllArgsConstructor;
+&nbsp;import io.swagger.v3.oas.annotations.media.Schema;
+&nbsp;import lombok.Builder;
+&nbsp;import lombok.Data;
+&nbsp;import lombok.NoArgsConstructor;
+&nbsp;
+&nbsp;@Data
+&nbsp;@AllArgsConstructor
+&nbsp;@NoArgsConstructor
+&nbsp;@Builder
+&nbsp;public class AvaliacaoRequest {
+&nbsp;
+&nbsp;    @Schema(description = &quot;Qual avaliacao&quot;, example = &quot;Muito bom o serviço&quot;)
+&nbsp;    private String descricao;
+&nbsp;
+&nbsp;    @Schema(description = &quot;Nota de 0 - 5 &quot;, example = &quot;4&quot;)
+&nbsp;    @Min(value = 0, message = &quot;A nota deve ser pelo menos 0&quot;)
+&nbsp;    @Max(value = 5, message = &quot;A nota não pode ser maior que 5&quot;)
+&nbsp;    private Integer nota;
+&nbsp;
+&nbsp;    @Schema(description = &quot;Tipo de Serviço ofertado&quot;, example = &quot;Massagem&quot;)
+&nbsp;    private String tipo;
+&nbsp;
+&nbsp;    @Schema(description = &quot;ID do Profissional que realizou&quot;, example = &quot;1&quot;)
+&nbsp;    private Long profissionalId;
+&nbsp;
+&nbsp;    @Schema(description = &quot;ID do Estabelecimento que realizou&quot;, example = &quot;1&quot;)
+&nbsp;
+&nbsp;    private Long estabelecimentoId;
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-09-29 18:11</div>
+</div>
+</body>
+</html>

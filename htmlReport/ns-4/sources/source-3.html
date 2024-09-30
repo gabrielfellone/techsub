@@ -1,0 +1,297 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=windows-1252"> 
+  <title>Coverage Report > EstabelecimentoService</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.sub.techsub.service</a>
+</div>
+
+<h1>Coverage Summary for Class: EstabelecimentoService (com.sub.techsub.service)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">EstabelecimentoService</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    12,5%
+  </span>
+  <span class="absValue">
+    (2/16)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    2,4%
+  </span>
+  <span class="absValue">
+    (2/84)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.sub.techsub.service;
+&nbsp;
+&nbsp;import com.sub.techsub.controller.resources.requests.EstabelecimentoRequest;
+&nbsp;import com.sub.techsub.controller.resources.responses.EstabelecimentoResource;
+&nbsp;import com.sub.techsub.entity.*;
+&nbsp;import com.sub.techsub.entity.reference.EstabelecimentoProfissional;
+&nbsp;import com.sub.techsub.entity.reference.EstabelecimentoServico;
+&nbsp;import com.sub.techsub.repository.EstabelecimentoProfissionalRepository;
+&nbsp;import com.sub.techsub.repository.EstabelecimentoRepository;
+&nbsp;import com.sub.techsub.repository.EstabelecimentoServicoRepository;
+&nbsp;import lombok.extern.slf4j.Slf4j;
+&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+&nbsp;import org.springframework.stereotype.Service;
+&nbsp;
+&nbsp;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.Arrays;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Optional;
+&nbsp;import java.util.stream.Collectors;
+&nbsp;
+<b class="fc">&nbsp;@Slf4j</b>
+&nbsp;@Service
+<b class="fc">&nbsp;public class EstabelecimentoService {</b>
+&nbsp;
+&nbsp;    @Autowired
+&nbsp;    EstabelecimentoRepository estabelecimentoRepository;
+&nbsp;
+&nbsp;    @Autowired
+&nbsp;    ServicosService servicosService;
+&nbsp;
+&nbsp;    @Autowired
+&nbsp;    ProfissionalService profissionalService;
+&nbsp;
+&nbsp;    @Autowired
+&nbsp;    EstabelecimentoProfissionalRepository estabelecimentoProfissionalRepository;
+&nbsp;
+&nbsp;    @Autowired
+&nbsp;    EstabelecimentoServicoRepository estabelecimentoServicoRepository;
+&nbsp;
+&nbsp;    public Long cadastrarEstabelecimento(EstabelecimentoRequest request){
+&nbsp;
+<b class="nc">&nbsp;        Estabelecimento estabelecimento = new Estabelecimento(request);</b>
+&nbsp;
+<b class="nc">&nbsp;        Long id = estabelecimentoRepository.save(estabelecimento).getId();</b>
+&nbsp;
+<b class="nc">&nbsp;        estabelecimento.setId(id);</b>
+&nbsp;
+<b class="nc">&nbsp;        validaSalvaServicos(request.getServicos(), estabelecimento);</b>
+&nbsp;
+<b class="nc">&nbsp;        validaSalvaProfissionais(request.getProfissionais(), estabelecimento);</b>
+&nbsp;
+<b class="nc">&nbsp;        return id;</b>
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    public void validaSalvaServicos(List&lt;Long&gt; servicosids, Estabelecimento estabelecimento){
+<b class="nc">&nbsp;        servicosids.forEach(id -&gt; {</b>
+&nbsp;            try {
+<b class="nc">&nbsp;                EstabelecimentoServico estabelecimentoServico = new EstabelecimentoServico();</b>
+<b class="nc">&nbsp;                Servico servico = servicosService.buscaPorIdServico(id);</b>
+&nbsp;
+<b class="nc">&nbsp;                estabelecimentoServico.setEstabelecimentoId(estabelecimento.getId());</b>
+<b class="nc">&nbsp;                estabelecimentoServico.setServicoId(servico.getId());</b>
+<b class="nc">&nbsp;                estabelecimentoServicoRepository.save(estabelecimentoServico);</b>
+<b class="nc">&nbsp;            } catch (RuntimeException e){</b>
+<b class="nc">&nbsp;                throw new RuntimeException(&quot;Servicos encontrados&quot;);</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;        });
+&nbsp;    }
+&nbsp;
+&nbsp;    public void validaSalvaProfissionais(List&lt;Long&gt; profissionaisIds, Estabelecimento estabelecimento){
+<b class="nc">&nbsp;        profissionaisIds.forEach(id -&gt; {</b>
+&nbsp;            try {
+<b class="nc">&nbsp;                EstabelecimentoProfissional estabelecimentoProfissional = new EstabelecimentoProfissional();</b>
+<b class="nc">&nbsp;                Profissional profissional = profissionalService.buscaPorIdProfissional(id);</b>
+&nbsp;
+<b class="nc">&nbsp;                estabelecimentoProfissional.setEstabelecimentoId(estabelecimento.getId());</b>
+<b class="nc">&nbsp;                estabelecimentoProfissional.setProfissionalId(profissional.getId());</b>
+<b class="nc">&nbsp;                estabelecimentoProfissionalRepository.save(estabelecimentoProfissional);</b>
+<b class="nc">&nbsp;            } catch (RuntimeException e){</b>
+<b class="nc">&nbsp;                throw new RuntimeException(&quot;Profissionais nao encontrados&quot;);</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;        });
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    public List&lt;EstabelecimentoResource&gt; listarTodos() {
+<b class="nc">&nbsp;        log.info(&quot;Buscando todos os estabelecimentos na base...&quot;);</b>
+<b class="nc">&nbsp;        List&lt;Estabelecimento&gt; estabelecimentos = estabelecimentoRepository.findAll();</b>
+&nbsp;
+<b class="nc">&nbsp;        return estabelecimentos.stream()</b>
+<b class="nc">&nbsp;                .filter(estabelecimento -&gt; !estabelecimento.getEstabelecimentoServicos().isEmpty())</b>
+<b class="nc">&nbsp;                .map(this::convertToEstabelecimentoResource)</b>
+<b class="nc">&nbsp;                .collect(Collectors.toList());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private EstabelecimentoResource convertToEstabelecimentoResource(Estabelecimento estabelecimento) {
+<b class="nc">&nbsp;        List&lt;Servico&gt; servicos = estabelecimento.getEstabelecimentoServicos().stream()</b>
+<b class="nc">&nbsp;                .map(servico -&gt; servicosService.buscaPorIdServico(servico.getServicoId()))</b>
+<b class="nc">&nbsp;                .collect(Collectors.toList());</b>
+<b class="nc">&nbsp;        List&lt;Profissional&gt; profissionais = estabelecimento.getProfissionais().stream()</b>
+<b class="nc">&nbsp;                .map(profissional -&gt; profissionalService.buscaPorIdProfissional(profissional.getProfissionalId()))</b>
+<b class="nc">&nbsp;                .collect(Collectors.toList());</b>
+&nbsp;
+<b class="nc">&nbsp;        return EstabelecimentoResource.builder()</b>
+<b class="nc">&nbsp;                .nome(estabelecimento.getNome())</b>
+<b class="nc">&nbsp;                .endereco(estabelecimento.getEndereco())</b>
+<b class="nc">&nbsp;                .horarioFuncionamento(estabelecimento.getHorarioFuncionamento())</b>
+<b class="nc">&nbsp;                .fotos(Arrays.stream(estabelecimento.getFotos()).collect(Collectors.toList()))</b>
+<b class="nc">&nbsp;                .servicos(servicos)</b>
+<b class="nc">&nbsp;                .profissionals(profissionais)</b>
+<b class="nc">&nbsp;                .avaliacao(estabelecimento.getAvaliacao())</b>
+<b class="nc">&nbsp;                .build();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Optional&lt;Estabelecimento&gt; buscaEstabelecimentoPorId(Long id){
+<b class="nc">&nbsp;        return estabelecimentoRepository.findById(id);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void atualizaEstabelecimento(Estabelecimento estabelecimento){
+<b class="nc">&nbsp;        log.info(&quot;Atualizando o estabelecimento {} na base&quot;, estabelecimento);</b>
+<b class="nc">&nbsp;        estabelecimentoRepository.save(estabelecimento);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    public List&lt;EstabelecimentoResource&gt; filtroEstabelecimento(String nome, String localizacao, String servicoOferecido,
+&nbsp;                                                               Double avaliacaoMin, Double faixaPrecoMin, Double faixaPrecoMax) {
+&nbsp;
+<b class="nc">&nbsp;        List&lt;EstabelecimentoResource&gt; estabelecimentos = this.listarTodos();</b>
+<b class="nc">&nbsp;        List&lt;EstabelecimentoResource&gt; estabelecimentoFiltrado = new ArrayList&lt;&gt;();</b>
+&nbsp;
+<b class="nc">&nbsp;        log.info(&quot;Realizando Filtro no Estabelecimento por base nos inputs...&quot;);</b>
+&nbsp;
+&nbsp;
+<b class="nc">&nbsp;        if(nome != null){</b>
+<b class="nc">&nbsp;            log.info(&quot;Procurando estabelecimento com o nome {}&quot;, nome);</b>
+<b class="nc">&nbsp;            estabelecimentoFiltrado = estabelecimentos.stream().filter(e -&gt; e.getNome().equalsIgnoreCase(nome)).collect(Collectors.toList());</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if(localizacao != null){</b>
+<b class="nc">&nbsp;            log.info(&quot;Procurando estabelecimento com a localizacao exata {}&quot;, localizacao);</b>
+<b class="nc">&nbsp;            estabelecimentoFiltrado = estabelecimentos.stream().filter(e -&gt; e.getEndereco().equalsIgnoreCase(localizacao)).collect(Collectors.toList());</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if(servicoOferecido != null){</b>
+<b class="nc">&nbsp;            log.info(&quot;Procurando servicos ofertados pelo estabelecimento {}&quot;, servicoOferecido);</b>
+<b class="nc">&nbsp;            if(estabelecimentoFiltrado.isEmpty()) {</b>
+<b class="nc">&nbsp;                estabelecimentoFiltrado.addAll(estabelecimentos);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            List&lt;EstabelecimentoResource&gt; filtroTemp = new ArrayList&lt;&gt;();</b>
+&nbsp;
+<b class="nc">&nbsp;            estabelecimentoFiltrado.forEach(e -&gt; {</b>
+<b class="nc">&nbsp;                e.getServicos().forEach(servico -&gt; {</b>
+<b class="nc">&nbsp;                    if(servico.getNome().equalsIgnoreCase(servicoOferecido)){</b>
+<b class="nc">&nbsp;                        filtroTemp.add(e);</b>
+&nbsp;                    }
+&nbsp;                });
+&nbsp;            });
+&nbsp;
+<b class="nc">&nbsp;            estabelecimentoFiltrado = filtroTemp;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if(avaliacaoMin != null){</b>
+<b class="nc">&nbsp;            log.info(&quot;Procurando estabelecimentos com avaliacao minima de {}&quot;, avaliacaoMin);</b>
+<b class="nc">&nbsp;            estabelecimentoFiltrado = estabelecimentos.stream().filter(e -&gt; e.getAvaliacao().getNota() &gt;= avaliacaoMin).collect(Collectors.toList());</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if(faixaPrecoMin != null &amp;&amp; faixaPrecoMax != null){</b>
+<b class="nc">&nbsp;            log.info(&quot;Procurando estabelecimentos com profissioanais nesta faixa de preco min {} e max {}&quot;, faixaPrecoMin,faixaPrecoMax );</b>
+<b class="nc">&nbsp;            if(estabelecimentoFiltrado.isEmpty()) {</b>
+<b class="nc">&nbsp;                estabelecimentoFiltrado.addAll(estabelecimentos);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            List&lt;EstabelecimentoResource&gt; filtroTemp = new ArrayList&lt;&gt;();</b>
+&nbsp;
+<b class="nc">&nbsp;            estabelecimentoFiltrado.forEach(e -&gt; {</b>
+<b class="nc">&nbsp;                e.getProfissionals().forEach(profissional -&gt; {</b>
+<b class="nc">&nbsp;                    Double precoProfissional = profissional.getTarifas();</b>
+<b class="nc">&nbsp;                    if(precoProfissional &gt;= faixaPrecoMin &amp;&amp; precoProfissional &lt;= faixaPrecoMax){</b>
+<b class="nc">&nbsp;                        filtroTemp.add(e);</b>
+&nbsp;                    }
+&nbsp;
+&nbsp;                });
+&nbsp;            });
+&nbsp;
+<b class="nc">&nbsp;            estabelecimentoFiltrado = filtroTemp;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return estabelecimentoFiltrado;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-09-29 18:11</div>
+</div>
+</body>
+</html>

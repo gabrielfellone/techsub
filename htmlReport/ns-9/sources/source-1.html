@@ -1,0 +1,98 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=windows-1252"> 
+  <title>Coverage Report > ProfissionalRequest</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.sub.techsub.controller.resources.requests</a>
+</div>
+
+<h1>Coverage Summary for Class: ProfissionalRequest (com.sub.techsub.controller.resources.requests)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+</tr>
+  <tr>
+    <td class="name">ProfissionalRequest$ProfissionalRequestBuilder</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.sub.techsub.controller.resources.requests;
+&nbsp;
+&nbsp;
+&nbsp;import io.swagger.v3.oas.annotations.media.Schema;
+&nbsp;import lombok.AllArgsConstructor;
+&nbsp;import lombok.Builder;
+&nbsp;import lombok.Data;
+&nbsp;import lombok.NoArgsConstructor;
+&nbsp;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;@Data
+&nbsp;@AllArgsConstructor
+&nbsp;@NoArgsConstructor
+&nbsp;@Builder
+&nbsp;public class ProfissionalRequest {
+&nbsp;
+&nbsp;    @Schema(description = &quot;Nome do Profissional&quot;, example = &quot;Maria Roberta&quot;)
+&nbsp;    private String nome;
+&nbsp;    @Schema(description = &quot;ID do Servico&quot;, example = &quot;1&quot;)
+&nbsp;    private Long servico;
+&nbsp;    @Schema(description = &quot;Horario de Funcionamento Seguir padrao exemplo Segunda Sexta 9:00-19:00&quot;, example = &quot;Segunda Sexta 9:00-19:00&quot;)
+&nbsp;    private String horariosDisponiveis; //exemplo de valor: Segunda Sexta 9:00-19:00
+&nbsp;    @Schema(description = &quot;Valor do Profissional&quot;, example = &quot;100.00&quot;)
+&nbsp;    private Double tarifas;
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-09-29 18:11</div>
+</div>
+</body>
+</html>

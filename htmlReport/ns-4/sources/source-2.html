@@ -1,0 +1,159 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=windows-1252"> 
+  <title>Coverage Report > AvaliacaoService</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.sub.techsub.service</a>
+</div>
+
+<h1>Coverage Summary for Class: AvaliacaoService (com.sub.techsub.service)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">AvaliacaoService</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    66,7%
+  </span>
+  <span class="absValue">
+    (2/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    9,5%
+  </span>
+  <span class="absValue">
+    (2/21)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.sub.techsub.service;
+&nbsp;
+&nbsp;import com.sub.techsub.controller.resources.requests.AvaliacaoRequest;
+&nbsp;import com.sub.techsub.entity.Avaliacao;
+&nbsp;import com.sub.techsub.entity.Estabelecimento;
+&nbsp;import com.sub.techsub.entity.Profissional;
+&nbsp;import com.sub.techsub.repository.AvaliacaoRepository;
+&nbsp;import lombok.extern.slf4j.Slf4j;
+&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+&nbsp;import org.springframework.stereotype.Service;
+&nbsp;
+&nbsp;import java.util.Optional;
+&nbsp;
+<b class="fc">&nbsp;@Slf4j</b>
+&nbsp;@Service
+<b class="fc">&nbsp;public class AvaliacaoService {</b>
+&nbsp;
+&nbsp;    @Autowired
+&nbsp;    ProfissionalService profissionalService;
+&nbsp;    @Autowired
+&nbsp;    EstabelecimentoService estabelecimentoService;
+&nbsp;    @Autowired
+&nbsp;    AvaliacaoRepository avaliacaoRepository;
+&nbsp;    public Long realizarAvalicao(AvaliacaoRequest avaliacaoRequest) {
+<b class="nc">&nbsp;        log.info(&quot;Realizando avaliação...&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;        Optional&lt;Estabelecimento&gt; estabelecimento =</b>
+<b class="nc">&nbsp;                estabelecimentoService.buscaEstabelecimentoPorId(avaliacaoRequest.getEstabelecimentoId());</b>
+&nbsp;
+<b class="nc">&nbsp;        Optional&lt;Profissional&gt; profissional =</b>
+<b class="nc">&nbsp;                profissionalService.buscarPerfilProfissional(avaliacaoRequest.getProfissionalId());</b>
+&nbsp;
+<b class="nc">&nbsp;        if(estabelecimento.isPresent()</b>
+<b class="nc">&nbsp;                &amp;&amp; profissional.isPresent()){</b>
+&nbsp;
+<b class="nc">&nbsp;            Avaliacao avaliacao = Avaliacao.builder()</b>
+<b class="nc">&nbsp;                    .descricao(avaliacaoRequest.getDescricao())</b>
+<b class="nc">&nbsp;                    .tipo(avaliacaoRequest.getTipo())</b>
+<b class="nc">&nbsp;                    .nota(avaliacaoRequest.getNota()).build();</b>
+&nbsp;
+<b class="nc">&nbsp;           Long idAvaliacao = avaliacaoRepository.save(avaliacao).getId();</b>
+&nbsp;
+<b class="nc">&nbsp;           profissional.get().setAvaliacao(avaliacao);</b>
+<b class="nc">&nbsp;           estabelecimento.get().setAvaliacao(avaliacao);</b>
+&nbsp;
+<b class="nc">&nbsp;           log.info(&quot;Registrando ultima avaliacao para Estabelecimento e Profissional&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;           profissionalService.atualizaProfissional(profissional.get());</b>
+<b class="nc">&nbsp;           estabelecimentoService.atualizaEstabelecimento(estabelecimento.get());</b>
+&nbsp;
+<b class="nc">&nbsp;           return idAvaliacao;</b>
+&nbsp;
+<b class="nc">&nbsp;        } else throw new RuntimeException(&quot;Profissional ou Estabelecimento nao encontrados! Por favor insira outro ID.&quot;);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-09-29 18:11</div>
+</div>
+</body>
+</html>

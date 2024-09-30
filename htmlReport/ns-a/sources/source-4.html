@@ -1,0 +1,108 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=windows-1252"> 
+  <title>Coverage Report > EstabelecimentoProfissional</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.sub.techsub.entity.reference</a>
+</div>
+
+<h1>Coverage Summary for Class: EstabelecimentoProfissional (com.sub.techsub.entity.reference)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+</tr>
+  <tr>
+    <td class="name">EstabelecimentoProfissional$HibernateInstantiator$VBzkBeGv</td>
+  </tr>
+  <tr>
+    <td class="name">EstabelecimentoProfissional$HibernateProxy$K57EU20M</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.sub.techsub.entity.reference;
+&nbsp;
+&nbsp;import com.sub.techsub.entity.Estabelecimento;
+&nbsp;import com.sub.techsub.entity.Profissional;
+&nbsp;import jakarta.persistence.*;
+&nbsp;import lombok.AllArgsConstructor;
+&nbsp;import lombok.Data;
+&nbsp;import lombok.NoArgsConstructor;
+&nbsp;
+&nbsp;@Entity
+&nbsp;@Table(name = &quot;estabelecimento_profissional&quot;)
+&nbsp;@Data
+&nbsp;@NoArgsConstructor
+&nbsp;@AllArgsConstructor
+&nbsp;@IdClass(EstabelecimentoProfissionalId.class)
+&nbsp;public class EstabelecimentoProfissional {
+&nbsp;
+&nbsp;    @Id
+&nbsp;    @Column(name = &quot;estabelecimento_id&quot;)
+&nbsp;    private Long estabelecimentoId;
+&nbsp;
+&nbsp;    @Id
+&nbsp;    @Column(name = &quot;profissional_id&quot;)
+&nbsp;    private Long profissionalId;
+&nbsp;
+&nbsp;    @ManyToOne
+&nbsp;    @JoinColumn(name = &quot;estabelecimento_id&quot;, insertable = false, updatable = false)
+&nbsp;    private Estabelecimento estabelecimento;
+&nbsp;
+&nbsp;    @ManyToOne
+&nbsp;    @JoinColumn(name = &quot;profissional_id&quot;, insertable = false, updatable = false)
+&nbsp;    private Profissional profissional;
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-09-29 18:11</div>
+</div>
+</body>
+</html>

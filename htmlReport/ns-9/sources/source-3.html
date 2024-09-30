@@ -1,0 +1,104 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=windows-1252"> 
+  <title>Coverage Report > AgendamentoRequest</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.sub.techsub.controller.resources.requests</a>
+</div>
+
+<h1>Coverage Summary for Class: AgendamentoRequest (com.sub.techsub.controller.resources.requests)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+</tr>
+  <tr>
+    <td class="name">AgendamentoRequest$AgendamentoRequestBuilder</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.sub.techsub.controller.resources.requests;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.annotation.JsonFormat;
+&nbsp;import io.swagger.v3.oas.annotations.media.Schema;
+&nbsp;import lombok.AllArgsConstructor;
+&nbsp;import lombok.Builder;
+&nbsp;import lombok.Data;
+&nbsp;import lombok.NoArgsConstructor;
+&nbsp;
+&nbsp;import java.time.LocalDateTime;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;@Data
+&nbsp;@AllArgsConstructor
+&nbsp;@NoArgsConstructor
+&nbsp;@Builder
+&nbsp;public class AgendamentoRequest {
+&nbsp;
+&nbsp;    @Schema(description = &quot;ID do Estabelecimento&quot;, example = &quot;1&quot;)
+&nbsp;    private Long estabelecimento;
+&nbsp;    @Schema(description = &quot;ID do Profissional&quot;, example = &quot;1&quot;)
+&nbsp;    private Long profissional;
+&nbsp;    @Schema(description = &quot;ID do Cliente&quot;, example = &quot;1&quot;)
+&nbsp;    private Long cliente;
+&nbsp;    @Schema(description = &quot;Status do Agendamento&quot;, example = &quot;Agendar&quot;)
+&nbsp;    private String status;
+&nbsp;    @Schema(description = &quot;Hora agendamento padrao: yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSS&#39;Z&#39;&quot;, example = &quot;2024-09-16T14:38:19.619Z&quot;)
+&nbsp;    @JsonFormat(pattern = &quot;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSS&#39;Z&#39;&quot;)
+&nbsp;    private LocalDateTime dataAgendamento; //exemplo de input 2024-09-16T14:38:19.619Z
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-09-29 18:11</div>
+</div>
+</body>
+</html>

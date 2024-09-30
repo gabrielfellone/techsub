@@ -1,0 +1,120 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=windows-1252"> 
+  <title>Coverage Report > Agendamento</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.sub.techsub.entity</a>
+</div>
+
+<h1>Coverage Summary for Class: Agendamento (com.sub.techsub.entity)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+</tr>
+  <tr>
+    <td class="name">Agendamento$AgendamentoBuilder</td>
+  </tr>
+  <tr>
+    <td class="name">Agendamento$HibernateInstantiator$OzHh9Thz</td>
+  </tr>
+  <tr>
+    <td class="name">Agendamento$HibernateProxy$qEn8Ende</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.sub.techsub.entity;
+&nbsp;
+&nbsp;import jakarta.persistence.*;
+&nbsp;import lombok.Builder;
+&nbsp;import lombok.NoArgsConstructor;
+&nbsp;import lombok.AllArgsConstructor;
+&nbsp;import java.time.LocalDate;
+&nbsp;import java.time.LocalTime;
+&nbsp;import lombok.Data;
+&nbsp;
+&nbsp;@Entity
+&nbsp;@Table(name = &quot;agendamento&quot;)
+&nbsp;@Data
+&nbsp;@Builder
+&nbsp;@NoArgsConstructor
+&nbsp;@AllArgsConstructor
+&nbsp;public class Agendamento {
+&nbsp;
+&nbsp;    @Id
+&nbsp;    @GeneratedValue(strategy = GenerationType.IDENTITY)
+&nbsp;    private Long id;
+&nbsp;
+&nbsp;    @ManyToOne
+&nbsp;    @JoinColumn(name = &quot;estabelecimento_id&quot;, nullable = false)
+&nbsp;    private Estabelecimento estabelecimento;
+&nbsp;
+&nbsp;    @ManyToOne
+&nbsp;    @JoinColumn(name = &quot;profissional_id&quot;, nullable = false)
+&nbsp;    private Profissional profissional;
+&nbsp;
+&nbsp;    @ManyToOne
+&nbsp;    @JoinColumn(name = &quot;cliente_id&quot;, nullable = false)
+&nbsp;    private Cliente cliente;
+&nbsp;
+&nbsp;    @Column(length = 50)
+&nbsp;    private String status;
+&nbsp;
+&nbsp;    @Column(name = &quot;data_agendamento&quot;, nullable = false)
+&nbsp;    private LocalDate dataAgendamento;
+&nbsp;
+&nbsp;    @Column(name = &quot;hora_agendamento&quot;, nullable = false)
+&nbsp;    private LocalTime horaAgendamento;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-09-29 18:11</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,113 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=windows-1252"> 
+  <title>Coverage Report > EstabelecimentoRequest</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.sub.techsub.controller.resources.requests</a>
+</div>
+
+<h1>Coverage Summary for Class: EstabelecimentoRequest (com.sub.techsub.controller.resources.requests)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+</tr>
+  <tr>
+    <td class="name">EstabelecimentoRequest$EstabelecimentoRequestBuilder</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.sub.techsub.controller.resources.requests;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;import io.swagger.v3.oas.annotations.media.Schema;
+&nbsp;import lombok.AllArgsConstructor;
+&nbsp;import lombok.Builder;
+&nbsp;import lombok.Data;
+&nbsp;import lombok.NoArgsConstructor;
+&nbsp;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;@Data
+&nbsp;@AllArgsConstructor
+&nbsp;@NoArgsConstructor
+&nbsp;@Builder
+&nbsp;public class EstabelecimentoRequest {
+&nbsp;
+&nbsp;    @Schema(description = &quot;Nome do Estabelecimento&quot;, example = &quot;Beleza&quot;)
+&nbsp;    private String nome;
+&nbsp;
+&nbsp;    @Schema(description = &quot;Endereco do Estabelecimento&quot;, example = &quot;Rua Antonio Martins&quot;)
+&nbsp;
+&nbsp;    private String endereco;
+&nbsp;
+&nbsp;    @Schema(description = &quot;IDS dos profissionais&quot;)
+&nbsp;
+&nbsp;    private List&lt;Long&gt; profissionais;
+&nbsp;
+&nbsp;    @Schema(description = &quot;IDs dos servicos&quot;)
+&nbsp;
+&nbsp;    private List&lt;Long&gt; servicos;
+&nbsp;
+&nbsp;    @Schema(description = &quot;Horario de Funcionamento Seguir padrao exemplo Segunda Sexta 9:00-19:00&quot;, example = &quot;Segunda Sexta 9:00-19:00&quot;)
+&nbsp;
+&nbsp;    private String horarioFuncionamento; //exemplo de valor: Segunda Sexta 9:00-19:00
+&nbsp;
+&nbsp;    @Schema(description = &quot;Lista de fotos&quot;)
+&nbsp;
+&nbsp;    private List&lt;String&gt; fotos;
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-09-29 18:11</div>
+</div>
+</body>
+</html>
