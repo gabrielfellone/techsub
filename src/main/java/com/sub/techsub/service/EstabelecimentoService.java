@@ -5,6 +5,8 @@ import com.sub.techsub.controller.resources.responses.EstabelecimentoResource;
 import com.sub.techsub.entity.*;
 import com.sub.techsub.entity.reference.EstabelecimentoProfissional;
 import com.sub.techsub.entity.reference.EstabelecimentoServico;
+import com.sub.techsub.exception.ProfissionalException;
+import com.sub.techsub.exception.ServicosException;
 import com.sub.techsub.repository.EstabelecimentoProfissionalRepository;
 import com.sub.techsub.repository.EstabelecimentoRepository;
 import com.sub.techsub.repository.EstabelecimentoServicoRepository;
@@ -64,7 +66,7 @@ public class EstabelecimentoService {
                 estabelecimentoServico.setServicoId(servico.getId());
                 estabelecimentoServicoRepository.save(estabelecimentoServico);
             } catch (RuntimeException e){
-                throw new RuntimeException("Servicos nao encontrados");
+                throw new ServicosException("Servicos nao encontrados");
             }
         });
     }
@@ -79,7 +81,7 @@ public class EstabelecimentoService {
                 estabelecimentoProfissional.setProfissionalId(profissional.getId());
                 estabelecimentoProfissionalRepository.save(estabelecimentoProfissional);
             } catch (RuntimeException e){
-                throw new RuntimeException("Profissionais nao encontrados");
+                throw new ProfissionalException("Profissionais nao encontrados");
             }
         });
     }

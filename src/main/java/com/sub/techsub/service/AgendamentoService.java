@@ -2,12 +2,15 @@ package com.sub.techsub.service;
 
 import com.sub.techsub.controller.resources.responses.AgendamentoDisponibilidadeResource;
 import com.sub.techsub.controller.resources.requests.AgendamentoRequest;
+import com.sub.techsub.controller.resources.responses.AgendamentosRealizados;
 import com.sub.techsub.entity.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 
+import com.sub.techsub.exception.AgendamentoException;
+import com.sub.techsub.exception.ProfissionalException;
 import com.sub.techsub.repository.AgendamentoRepository;
 import com.sub.techsub.repository.ClienteRepository;
 import com.sub.techsub.utils.FormatadorFuncionamentoData;
@@ -84,7 +87,7 @@ public class AgendamentoService {
                     .profissionais(profissionais)
                     .servicos(servicos)
                     .build();
-        } else throw new RuntimeException("Estabelecimento nao encontrado, por favor, insira outro ID");
+        } else throw new AgendamentoException("Estabelecimento nao encontrado, por favor, insira outro ID");
 
     }
 
@@ -112,7 +115,7 @@ public class AgendamentoService {
         if (estabelecimento.isPresent()) {
             log.info("Validando Data e hora do Estabelecimento...");
             FormatadorFuncionamentoData.formataEValidaDataHoraAgendamento(estabelecimento.get().getHorarioFuncionamento(), dataAgendamento);
-        } else throw new RuntimeException("Estabelecimento não encontrado");
+        } else throw new AgendamentoException("Estabelecimento não encontrado");
     }
 
     public void validaDataEHoraProfissional(Long idProfissional, LocalDateTime dataAgendamento) {
@@ -120,8 +123,21 @@ public class AgendamentoService {
         if (profissional.isPresent()) {
             log.info("Validando Data e hora do Profissional...");
             FormatadorFuncionamentoData.formataEValidaDataHoraAgendamento(profissional.get().getHorariosDisponiveis(), dataAgendamento);
-        } else throw new RuntimeException("Profissional não encontrado");
+        } else throw new ProfissionalException("Profissional não encontrado");
     }
 
+    public List<AgendamentosRealizados> listarTodos(){
+        log.info("Listando todos os agendamentos ");
+        List<AgendamentosRealizados> agendamentosRealizados = new ArrayList<>();
+        List<Agendamento> agendamentos = agendamentoRepository.findAll();
+
+        if(!agendamentos.isEmpty()){
+            agendamentos.forEach(a ->{
+                agendamentosRealizados.add(new AgendamentosRealizados(a));
+            });
+        }
+        return agendamentosRealizados;
+
+    }
 
 }
